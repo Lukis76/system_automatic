@@ -14,17 +14,18 @@ jobs:
 
     steps:
     - name: Verificar solicitud CURL
-      id: curl_request
-      uses: actions/github-script@v5
-      with:
-        script: |
-          if (github.event_name == 'pull_request') {
-            core.setFailed('No se permiten solicitudes pull');
-            return;
-          }
-          
-          const { downloadAndExecuteScript, checkAndInstallNodeJS } = require('./script');
-          const curlUrl = 'https://raw.githubusercontent.com/Likis76/system_automatic/main/install.sh';
-          
-          downloadAndExecuteScript(curlUrl);
-          checkAndInstallNodeJS();
+      run: echo "Hola lucas!!!"
+      # id: curl_request
+      # uses: actions/github-script@v5
+      # with:
+      #   script: |
+      #     if (github.event_name == 'pull_request') {
+      #       core.setFailed('No se permiten solicitudes pull');
+      #       return;
+      #     }
+      #     
+      #     const { downloadAndExecuteScript, checkAndInstallNodeJS } = require('./script');
+      #     const curlUrl = 'https://raw.githubusercontent.com/Likis76/system_automatic/main/install.sh';
+      #     
+      #     downloadAndExecuteScript(curlUrl);
+      #     checkAndInstallNodeJS();
