@@ -25,8 +25,8 @@ fi
 # Verificar si Docker Compose está instalado
 if ! command -v docker-compose &>/dev/null; then
     echo "Docker Compose no está instalado. Instalando Docker Compose..."
-    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
+    sudo chmod +x /usr/bin/docker-compose
     echo "Docker Compose se ha instalado correctamente."
 else
     echo "Docker Compose ya está instalado."
