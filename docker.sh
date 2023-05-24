@@ -16,9 +16,6 @@ fi
 if ! command -v docker &>/dev/null; then
 	echo "Docker no está instalado. Instalando Docker..."
 	curl -fsSL https://get.docker.com | sh
-	sudo usermod -aG docker "$USER"
-	sudo ls -la /var/run/docker.sock
-	sudo chown $USER:$USER /var/run/docker.sock
 	echo "Docker se ha instalado correctamente."
 else
 	echo "Docker ya está instalado."
@@ -36,21 +33,24 @@ fi
 # Verificar si Docker Compose está instalado
 if ! command -v docker-compose &>/dev/null; then
 	echo "Docker Compose no está instalado. Instalando Docker Compose..."
-  sudo apt-get install docker-compose -y
+	sudo apt-get install docker-compose -y
 	echo "Docker Compose se ha instalado correctamente."
 else
 	echo "Docker Compose ya está instalado."
 
-
-  if sudo apt-get update -qq --allow-releaseinfo-change && sudo apt-get upgrade -s docker-compose | grep -q 'Inst docker-compose'; then
+	if sudo apt-get update -qq --allow-releaseinfo-change && sudo apt-get upgrade -s docker-compose | grep -q 'Inst docker-compose'; then
 
 		echo "Hay una actualización disponible para Docker Compose. Actualizando Docker Compose..."
-    sudo apt-get update -qq --allow-releaseinfo-change && sudo apt-get upgrade -y docker-compose
+		sudo apt-get update -qq --allow-releaseinfo-change && sudo apt-get upgrade -y docker-compose
 		echo "Docker Compose se ha actualizado correctamente."
 	else
 		echo "Docker Compose ya está en la última versión."
 	fi
 fi
+
+sudo usermod -aG docker "$USER"
+sudo ls -la /var/run/docker.sock
+sudo chown $USER:$USER /var/run/docker.sock
 
 # Verificar las versiones instaladas
 echo "Versiones instaladas:"
