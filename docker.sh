@@ -33,40 +33,19 @@ else
 	fi
 fi
 
-# Verificar si pip está instalado
-if ! command -v pip &>/dev/null; then
-	echo "pip no está instalado. Instalando pip..."
-	sudo apt-get install -y python3-pip
-	echo "pip se ha instalado correctamente."
-else
-	echo "pip ya está instalado."
-fi
-
-# Verificar si pip está en su última versión
-installed_version=$(pip --version | awk '{print $2}')
-latest_version=$(pip install --upgrade pip >/dev/null && pip --version | awk '{print $2}')
-if [[ $installed_version != $latest_version ]]; then
-	echo "Hay una actualización disponible para pip. Actualizando pip..."
-	pip install --upgrade pip
-	echo "pip se ha actualizado correctamente."
-else
-	echo "pip ya está en la última versión."
-fi
-
 # Verificar si Docker Compose está instalado
 if ! command -v docker-compose &>/dev/null; then
 	echo "Docker Compose no está instalado. Instalando Docker Compose..."
-	sudo pip install docker-compose
+  sudo apt-get install docker-compose -y
 	echo "Docker Compose se ha instalado correctamente."
 else
 	echo "Docker Compose ya está instalado."
 
-	# Verificar si hay actualizaciones disponibles para Docker Compose
-	installed_version=$(docker-compose --version | awk '{print $3}')
-	latest_version=$(curl -sSL https://api.github.com/repos/docker/compose/releases/latest | grep -oE '([0-9]+\.){2}[0-9]+' | head -n 1)
-	if [[ $installed_version != $latest_version ]]; then
+
+  if sudo apt-get update -qq --allow-releaseinfo-change && sudo apt-get upgrade -s docker-compose | grep -q 'Inst docker-compose'; then
+
 		echo "Hay una actualización disponible para Docker Compose. Actualizando Docker Compose..."
-		sudo pip install --upgrade docker-compose
+    sudo apt-get update -qq --allow-releaseinfo-change && sudo apt-get upgrade -y docker-compose
 		echo "Docker Compose se ha actualizado correctamente."
 	else
 		echo "Docker Compose ya está en la última versión."
