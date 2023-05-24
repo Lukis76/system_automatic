@@ -48,6 +48,8 @@ else
 	fi
 fi
 
+sudo service docker status
+sudo service docker start
 sudo usermod -aG docker "$USER"
 sudo ls -la /var/run/docker.sock
 sudo chown $USER:$USER /var/run/docker.sock
