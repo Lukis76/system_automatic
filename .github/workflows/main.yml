@@ -6,7 +6,7 @@ name: Ejecutar script al recibir solicitud CURL
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   run_script:
