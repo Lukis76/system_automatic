@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 echo "Hola lucas desde el repo!!!"
