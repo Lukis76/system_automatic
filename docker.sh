@@ -17,6 +17,8 @@ if ! command -v docker &>/dev/null; then
 	echo "Docker no está instalado. Instalando Docker..."
 	curl -fsSL https://get.docker.com | sh
 	sudo usermod -aG docker "$USER"
+	sudo ls -la /var/run/docker.sock
+	sudo chown $USER:$USER /var/run/docker.sock
 	echo "Docker se ha instalado correctamente."
 else
 	echo "Docker ya está instalado."
